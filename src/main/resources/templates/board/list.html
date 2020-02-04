@@ -5,45 +5,72 @@
     <title>Title</title>
 
     <link rel="stylesheet" th:href="@{/css/board.css}">
+    <!-- HEADER -->
+    <div th:insert="common/header.html" id="header"></div>
 </head>
-<body>
-<!-- HEADER -->
-<div th:insert="common/header.html" id="header"></div>
+<body id="page-top">
 
-<a th:href="@{/post}">글쓰기</a>
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-<table>
-    <thead>
-    <tr>
-        <th class="one wide">번호</th>
-        <th class="ten wide">글제목</th>
-        <th class="two wide">작성자</th>
-        <th class="three wide">작성일</th>
-    </tr>
-    </thead>
+    <!-- ASIDE -->
+    <div th:insert="common/aside.html" id="aside"></div>
 
-    <tbody>
-    <!-- CONTENTS !-->
-    <tr th:each="board : ${boardList}">
-        <td>
-            <span th:text="${board.id}"></span>
-        </td>
-        <td>
-            <a th:href="@{'/post/' + ${board.id}}">
-                <span th:text="${board.title}"></span>
-            </a>
-        </td>
-        <td>
-            <span th:text="${board.writer}"></span>
-        </td>
-        <td>
-            <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-<!-- FOOTER -->
-<div th:insert="common/footer.html" id="footer"></div>
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- NAVBAR -->
+            <div th:insert="common/navbar.html" id="navbar"></div>
+
+
+
+
+            <a th:href="@{/post}">글쓰기</a>
+
+            <table>
+                <thead>
+                <tr>
+                    <th class="one wide">번호</th>
+                    <th class="ten wide">글제목</th>
+                    <th class="two wide">작성자</th>
+                    <th class="three wide">작성일</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <!-- CONTENTS !-->
+                <tr th:each="board : ${boardList}">
+                    <td>
+                        <span th:text="${board.id}"></span>
+                    </td>
+                    <td>
+                        <a th:href="@{'/post/' + ${board.id}}">
+                            <span th:text="${board.title}"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <span th:text="${board.writer}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- FOOTER -->
+            <div th:insert="common/footer.html" id="footer"></div>
+
+
+        </div>
+    </div>
+
+</div>
+
 </body>
+
+
 </html>
