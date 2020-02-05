@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" th:href="@{/css/board.css}">
+<!--    <link rel="stylesheet" th:href="@{/css/board.css}">-->
     <!-- HEADER -->
     <div th:insert="common/header.html" id="header"></div>
+
 </head>
 <body id="page-top">
 
@@ -27,39 +28,118 @@
 
 
 
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
 
-            <a th:href="@{/post}">글쓰기</a>
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more
+                    information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official
+                        DataTables documentation</a>.</p>
 
-            <table>
-                <thead>
-                <tr>
-                    <th class="one wide">번호</th>
-                    <th class="ten wide">글제목</th>
-                    <th class="two wide">작성자</th>
-                    <th class="three wide">작성일</th>
-                </tr>
-                </thead>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th class="one wide">번호</th>
+                                    <th class="ten wide">글제목</th>
+                                    <th class="two wide">작성자</th>
+                                    <th class="three wide">작성일</th>
+                                </tr>
+                                </thead>
 
-                <tbody>
-                <!-- CONTENTS !-->
-                <tr th:each="board : ${boardList}">
-                    <td>
-                        <span th:text="${board.id}"></span>
-                    </td>
-                    <td>
-                        <a th:href="@{'/post/' + ${board.id}}">
-                            <span th:text="${board.title}"></span>
-                        </a>
-                    </td>
-                    <td>
-                        <span th:text="${board.writer}"></span>
-                    </td>
-                    <td>
-                        <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                                <tfoot>
+                                <tr>
+                                    <th class="one wide">번호</th>
+                                    <th class="ten wide">글제목</th>
+                                    <th class="two wide">작성자</th>
+                                    <th class="three wide">작성일</th>
+                                </tr>
+                                </tfoot>
+
+
+                                <tbody>
+                                <!-- CONTENTS !-->
+                                <tr th:each="board : ${boardList}">
+                                    <td>
+                                        <span th:text="${board.id}"></span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/post/' + ${board.id}}">
+                                            <span th:text="${board.title}"></span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span th:text="${board.writer}"></span>
+                                    </td>
+                                    <td>
+                                        <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <a th:href="@{/post}">글쓰기</a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--            <a th:href="@{/post}">글쓰기</a>-->
+
+<!--            <table>-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th class="one wide">번호</th>-->
+<!--                    <th class="ten wide">글제목</th>-->
+<!--                    <th class="two wide">작성자</th>-->
+<!--                    <th class="three wide">작성일</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+
+<!--                <tbody>-->
+<!--                &lt;!&ndash; CONTENTS !&ndash;&gt;-->
+<!--                <tr th:each="board : ${boardList}">-->
+<!--                    <td>-->
+<!--                        <span th:text="${board.id}"></span>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <a th:href="@{'/post/' + ${board.id}}">-->
+<!--                            <span th:text="${board.title}"></span>-->
+<!--                        </a>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <span th:text="${board.writer}"></span>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
 
             <!-- FOOTER -->
             <div th:insert="common/footer.html" id="footer"></div>

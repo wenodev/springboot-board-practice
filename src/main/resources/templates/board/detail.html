@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <!--    <link rel="stylesheet" th:href="@{/css/board.css}">-->
+
+    <!-- HEADER -->
+    <div th:insert="common/header.html" id="header"></div>
 </head>
-<body>
+<body id="page-top">
+
 
 <h2 th:text="${boardDto.title}"></h2>
 <p th:inline="text">작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]]</p>
@@ -23,6 +29,7 @@
     </form>
 </div>
 
+
 <!-- 변수 셋팅 -->
 <script th:inline="javascript">
     /*<![CDATA[*/
@@ -31,6 +38,7 @@
 </script>
 
 <!-- script -->
-<script th:inline="javascript" th:src="@{/js/board.js}"></script>
+<!--<script th:inline="javascript" th:src="@{/js/board.js}"></script>-->
 </body>
 </html>
+

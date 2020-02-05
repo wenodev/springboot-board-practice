@@ -1,16 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
-<body>
-<form  action="/post" method="post">
-    제목 : <input type="text" name="title"> <br>
-    작성자 : <input type="text" name="writer"> <br>
-    <textarea name="content"></textarea><br>
 
-    <input type="submit" value="등록">
-</form>
+    <!--    <link rel="stylesheet" th:href="@{/css/board.css}">-->
+
+    <!-- HEADER -->
+    <div th:insert="common/header.html" id="header"></div>
+</head>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- ASIDE -->
+    <div th:insert="common/aside.html" id="aside"></div>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- NAVBAR -->
+            <div th:insert="common/navbar.html" id="navbar"></div>
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Contact Section -->
+                <section class="page-section" id="contact">
+                    <div class="container">
+
+                        <!-- Contact Section Heading -->
+                        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">글쓰기</h2>
+
+
+                        <!-- Contact Section Form -->
+                        <div class="row">
+                            <div class="col-lg-8 mx-auto">
+                                <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                                <form action="/post" method="post" name="sentMessage" id="contactForm"
+                                      novalidate="novalidate">
+                                    <div class="control-group">
+                                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                            <label>Name</label>
+                                            <input name="writer" class="form-control" id="name" type="text"
+                                                   placeholder="Name"
+                                                   required="required"
+                                                   data-validation-required-message="Please enter your name." readonly>
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                            <label>Title</label>
+                                            <input name="title" class="form-control" id="title" type="title"
+                                                   placeholder="Title" required="required"
+                                                   data-validation-required-message="Please enter your email address.">
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                            <label>Contents</label>
+                                            <textarea name="content" class="form-control" id="message" rows="5"
+                                                      placeholder="Message"
+                                                      required="required"
+                                                      data-validation-required-message="Please enter a message."></textarea>
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div id="success"></div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+                <!--<form action="/post" method="post">-->
+                <!--    제목 : <input type="text" name="title"> <br>-->
+                <!--    작성자 : <input type="text" name="writer"> <br>-->
+                <!--    <textarea name="content"></textarea><br>-->
+
+                <!--    <input type="submit" value="등록">-->
+                <!--</form>-->
+
+            </div>
+            <!-- FOOTER -->
+            <div th:insert="common/footer.html" id="footer"></div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>

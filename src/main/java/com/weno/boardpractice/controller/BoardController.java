@@ -52,7 +52,6 @@ public class BoardController {
         return "redirect:/";
     }
 
-
     @GetMapping("/post")
     public String write(){
         return "/board/write.html";
