@@ -30,7 +30,7 @@ public class BoardController {
         return "/board/detail.html";
     }
 
-    @GetMapping("/post/edit{no}")
+    @GetMapping("/post/edit/{no}")
     public String edit(@PathVariable("no") Long no, Model model){
         BoardDto boardDto = boardService.getPost(no);
 
