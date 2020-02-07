@@ -30,6 +30,11 @@ public class BoardController {
         return "/board/detail.html";
     }
 
+    @GetMapping("/post")
+    public String write(){
+        return "/board/write.html";
+    }
+
     @GetMapping("/post/edit/{no}")
     public String edit(@PathVariable("no") Long no, Model model){
         BoardDto boardDto = boardService.getPost(no);
@@ -52,10 +57,7 @@ public class BoardController {
         return "redirect:/";
     }
 
-    @GetMapping("/post")
-    public String write(){
-        return "/board/write.html";
-    }
+
 
     @PostMapping("/post")
     public String write(BoardDto boardDto){
