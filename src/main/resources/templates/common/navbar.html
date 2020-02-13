@@ -1,4 +1,7 @@
 <!-- Topbar -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -158,27 +161,51 @@
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a  class="dropdown-item" sec:authorize="isAnonymous()" th:href="@{/user/login}">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
+                    로그인
                 </a>
-                <a class="dropdown-item" href="#">
+
+                <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400">
+                    로그아웃
+                    </i>
+                </a>
+
+                <a  class="dropdown-item" sec:authorize="isAnonymous()" th:href="@{/user/signup}">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
+                    회원가입
                 </a>
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Activity Log
+
+
+                <a  class="dropdown-item"  sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/user/info}">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    내정보
                 </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Logout
+
+
+                <a class="dropdown-item"  sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    어드민
                 </a>
+
+
+
+
+
+<!--                <div class="dropdown-divider"></div>-->
+<!--                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">-->
+<!--                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>-->
+<!--                    Logout-->
+<!--                </a>-->
             </div>
         </li>
 
     </ul>
 
 </nav>
+
 <!-- End of Topbar -->
+
+
+</html>
