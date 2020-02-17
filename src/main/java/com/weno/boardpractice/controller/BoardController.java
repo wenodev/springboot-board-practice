@@ -1,6 +1,5 @@
 package com.weno.boardpractice.controller;
 
-
 import com.weno.boardpractice.dto.BoardDto;
 import com.weno.boardpractice.service.BoardService;
 import lombok.AllArgsConstructor;
@@ -57,15 +56,10 @@ public class BoardController {
         return "redirect:/";
     }
 
-
-
     @PostMapping("/post")
     public String write(BoardDto boardDto){
         boardService.savePost(boardDto);
 
         return "redirect:/";
     }
-
-
-
 }

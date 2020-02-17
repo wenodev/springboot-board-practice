@@ -27,13 +27,17 @@ public class BoardEntity extends TimeEntity{
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    // OrderGroup N : 1 User
+    @ManyToOne
+    private MemberEntity memberEntity;
 
     @Builder
-    public BoardEntity(Long id, String writer, String title, String content){
+    public BoardEntity(Long id, String writer, String title, String content, MemberEntity memberEntity){
         this.id = id;
         this.writer = writer;
         this.title = title;
         this.content = content;
+        this.memberEntity = memberEntity;
     }
 
 }

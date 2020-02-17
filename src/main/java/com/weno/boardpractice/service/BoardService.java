@@ -41,7 +41,6 @@ public class BoardService {
         }
 
         return boardDtoList;
-
     }
 
     @Transactional
@@ -58,7 +57,6 @@ public class BoardService {
                 .build();
 
         return boardDTO;
-
     }
 
     public void deletePost(Long id) {

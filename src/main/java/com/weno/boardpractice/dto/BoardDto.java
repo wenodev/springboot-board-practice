@@ -2,6 +2,7 @@ package com.weno.boardpractice.dto;
 
 
 import com.weno.boardpractice.domain.entity.BoardEntity;
+import com.weno.boardpractice.domain.entity.MemberEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public class BoardDto {
     private String content;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
+    private MemberEntity memberDto;
 
     public BoardEntity toEntity() {
         BoardEntity build = BoardEntity.builder()
@@ -25,6 +27,7 @@ public class BoardDto {
                 .writer(writer)
                 .title(title)
                 .content(content)
+                .memberEntity(memberDto)
                 .build();
         return build;
     }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -21,6 +22,10 @@ public class MemberEntity {
 
     @Column(length = 100, nullable = false)
     private String password;
+
+    // User 1 : N OrderGroup
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "memberEntity")
+    private List<BoardEntity> boardEntityList;
 
     @Builder
     public MemberEntity(Long id, String email, String password) {
