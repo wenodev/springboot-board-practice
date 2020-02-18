@@ -1,12 +1,15 @@
 package com.weno.boardpractice.controller;
 
 import com.weno.boardpractice.dto.BoardDto;
+import com.weno.boardpractice.dto.MemberDto;
 import com.weno.boardpractice.service.BoardService;
+import com.weno.boardpractice.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -14,6 +17,8 @@ import java.util.List;
 public class BoardController {
 
     private BoardService boardService;
+    private MemberService memberService;
+
 
     @GetMapping("/")
     public String list(Model model){
@@ -30,15 +35,18 @@ public class BoardController {
     }
 
     @GetMapping("/post")
-    public String write(){
+    public String write(Model model, Principal principal){
+
+        MemberDto memberDto = memberService.getMemberInfo(principal.getName());
+        model.addAttribute("memberEmail", memberDto);
         return "/board/write.html";
     }
 
     @GetMapping("/post/edit/{no}")
     public String edit(@PathVariable("no") Long no, Model model){
         BoardDto boardDto = boardService.getPost(no);
-
         model.addAttribute("boardDto", boardDto);
+
         return "/board/update.html";
     }
 

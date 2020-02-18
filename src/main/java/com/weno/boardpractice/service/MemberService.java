@@ -1,6 +1,7 @@
 package com.weno.boardpractice.service;
 
 import com.weno.boardpractice.domain.Role;
+import com.weno.boardpractice.domain.entity.BoardEntity;
 import com.weno.boardpractice.domain.entity.MemberEntity;
 import com.weno.boardpractice.domain.repository.MemberRepository;
 import com.weno.boardpractice.dto.MemberDto;
@@ -53,12 +54,22 @@ public class MemberService implements UserDetailsService {
 
         return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
 
-
-
     }
 
 
 
+    @Transactional
+    public MemberDto getMemberInfo(String email) {
+        Optional<MemberEntity> memberEntityWrapper = memberRepository.findByEmail(email);
+        MemberEntity memberEntity = memberEntityWrapper.get();
+
+        MemberDto memberDto = MemberDto.builder()
+                .email(memberEntity.getEmail())
+                .build();
+
+        return memberDto;
+
+    }
 
 
 

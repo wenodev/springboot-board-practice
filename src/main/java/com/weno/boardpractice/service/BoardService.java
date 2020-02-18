@@ -33,7 +33,7 @@ public class BoardService {
                     .id(boardEntity.getId())
                     .title(boardEntity.getTitle())
                     .content(boardEntity.getContent())
-                    .writer(boardEntity.getWriter())
+                    .memberDto(boardEntity.getMemberEntity())
                     .createdDate(boardEntity.getCreatedDate())
                     .build();
 
@@ -52,7 +52,7 @@ public class BoardService {
                 .id(boardEntity.getId())
                 .title(boardEntity.getTitle())
                 .content(boardEntity.getContent())
-                .writer(boardEntity.getWriter())
+                .memberDto(boardEntity.getMemberEntity())
                 .createdDate(boardEntity.getCreatedDate())
                 .build();
 
