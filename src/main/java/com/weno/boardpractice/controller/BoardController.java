@@ -1,9 +1,7 @@
 package com.weno.boardpractice.controller;
 
 import com.weno.boardpractice.dto.BoardDto;
-import com.weno.boardpractice.dto.MemberDto;
 import com.weno.boardpractice.service.BoardService;
-import com.weno.boardpractice.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,6 @@ import java.util.List;
 public class BoardController {
 
     private BoardService boardService;
-    private MemberService memberService;
 
 
     @GetMapping("/")
@@ -34,11 +31,14 @@ public class BoardController {
         return "/board/detail.html";
     }
 
-    @GetMapping("/post")
-    public String write(Model model, Principal principal){
+    @PostMapping("/post")
+    public String write(BoardDto boardDto ){
+        boardService.savePost(boardDto);
+        return "redirect:/";
+    }
 
-        MemberDto memberDto = memberService.getMemberInfo(principal.getName());
-        model.addAttribute("memberEmail", memberDto);
+    @GetMapping("/post")
+    public String write(){
         return "/board/write.html";
     }
 
@@ -64,10 +64,5 @@ public class BoardController {
         return "redirect:/";
     }
 
-    @PostMapping("/post")
-    public String write(BoardDto boardDto){
-        boardService.savePost(boardDto);
 
-        return "redirect:/";
-    }
 }

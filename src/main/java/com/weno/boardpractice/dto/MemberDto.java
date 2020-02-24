@@ -6,8 +6,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @ToString
 @NoArgsConstructor
 public class MemberDto {

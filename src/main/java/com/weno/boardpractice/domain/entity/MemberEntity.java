@@ -1,18 +1,17 @@
 package com.weno.boardpractice.domain.entity;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
+@Data
 @Entity
 @Table(name = "member")
 public class MemberEntity {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -22,10 +21,6 @@ public class MemberEntity {
 
     @Column(length = 100, nullable = false)
     private String password;
-
-    // User 1 : N OrderGroup
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "memberEntity")
-    private List<BoardEntity> boardEntityList;
 
     @Builder
     public MemberEntity(Long id, String email, String password) {
