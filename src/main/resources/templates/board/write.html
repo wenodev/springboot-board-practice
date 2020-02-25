@@ -42,11 +42,9 @@
                         <!-- Contact Section Form -->
                         <div class="row">
                             <div class="col-lg-8 mx-auto">
-                                 To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.
+
                                 <form th:action="@{/post}" method="post" name="sentMessage" id="contactForm"
                                       novalidate="novalidate">
-
-
 
                                     <div class="control-group">
                                         <div class="form-group floating-label-form-group controls mb-0 pb-2">
@@ -57,14 +55,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="control-group">
-                                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                            <label>Writer</label>
-                                            <input  type="text" name="writer" class="form-control"
-                                                    data-validation-required-message="Please enter your Name.">
-                                            <p class="help-block text-danger"></p>
-                                        </div>
-                                    </div>
+<!--                                    <div class="control-group">-->
+<!--                                        <div class="form-group floating-label-form-group controls mb-0 pb-2">-->
+<!--                                            <label>Writer</label>-->
+<!--                                            <input  type="text" name="writer" class="form-control"-->
+<!--                                                    data-validation-required-message="Please enter your Name.">-->
+<!--                                            <p class="help-block text-danger"></p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
 
 
                                     <div class="control-group">

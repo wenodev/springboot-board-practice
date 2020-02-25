@@ -31,14 +31,9 @@ public class BoardController {
         return "/board/detail.html";
     }
 
-    @PostMapping("/post")
-    public String write(BoardDto boardDto ){
-        boardService.savePost(boardDto);
-        return "redirect:/";
-    }
-
     @GetMapping("/post")
-    public String write(){
+    public String write(Principal principal){
+        System.out.println(principal.getName());
         return "/board/write.html";
     }
 
@@ -50,16 +45,24 @@ public class BoardController {
         return "/board/update.html";
     }
 
-    @PutMapping("/post/edit/{no}")
-    public String update(BoardDto boardDto){
-        boardService.savePost(boardDto);
 
-        return "redirect:/";
-    }
 
     @DeleteMapping("/post/{no}")
     public String delete(@PathVariable("no") Long no) {
         boardService.deletePost(no);
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/post")
+    public String write(BoardDto boardDto, Principal principal ){
+        boardService.savePost(boardDto, principal.getName());
+        return "redirect:/";
+    }
+
+    @PutMapping("/post/edit/{no}")
+    public String update(BoardDto boardDto){
+        boardService.savePost(boardDto, null);
 
         return "redirect:/";
     }

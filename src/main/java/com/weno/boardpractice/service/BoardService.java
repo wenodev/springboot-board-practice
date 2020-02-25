@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,11 +21,20 @@ public class BoardService {
 
     private MemberRepository memberRepository;
 
-
     @Transactional
-    public Long savePost(BoardDto boardDto) {
+    public BoardEntity savePost(BoardDto boardDto, String email) {
 
-        return boardRepository.save(boardDto.toEntity()).getId();
+        Optional<MemberEntity> memberEntity = memberRepository.findByEmail(email);
+
+        BoardEntity board = BoardEntity.builder()
+                .title(boardDto.getTitle())
+                .content(boardDto.getContent())
+                .writer(email)
+                .memberEntity(memberEntity.get())
+                .build();
+
+        return boardRepository.save(board);
+//        return boardRepository.save(boardDto.toEntity()).getId();
     }
 
     @Transactional
@@ -38,7 +46,7 @@ public class BoardService {
         for(BoardEntity boardEntity : boardEntityList){
             BoardDto boardDto = BoardDto.builder()
                     .id(boardEntity.getId())
-                    .writer(boardEntity.getWriter())
+                    .writer(boardEntity.getMemberEntity().getEmail())
                     .title(boardEntity.getTitle())
                     .content(boardEntity.getContent())
                     .createdDate(boardEntity.getCreatedDate())
