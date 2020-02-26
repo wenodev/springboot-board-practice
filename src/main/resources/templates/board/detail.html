@@ -8,12 +8,20 @@
 
     <!-- HEADER -->
     <div th:insert="common/header.html" id="header"></div>
+
+    <style>
+        .detail-button{ float : right; margin-right: 30px;}
+        #delete-form{ display: inline;}
+
+
+    </style>
+
+
 </head>
 <body id="page-top">
 
 <!-- Page Wrapper -->
 <div id="wrapper">
-
 
     <!-- ASIDE -->
     <div th:insert="common/aside.html" id="aside"></div>
@@ -24,39 +32,79 @@
         <!-- Main Content -->
         <div id="content">
 
-
-
-
             <!-- NAVBAR -->
             <div th:insert="common/navbar.html" id="navbar"></div>
 
 
-            <h2 th:text="${boardDto.title}"></h2>
-            <p th:inline="text">작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]]</p>
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
 
-            <p th:text="${boardDto.content}"></p>
+                <!-- Contact Section -->
+                <section class="page-section" id="contact">
+                    <div class="container">
 
-            <!-- 수정/삭제 -->
-            <div>
-                <a th:href="@{'/post/edit/' + ${boardDto.id}}">
-                    <button>수정</button>
-                </a>
 
-                <form id="delete-form" th:action="@{'/post/' + ${boardDto.id}}" method="post">
-                    <input type="hidden" name="_method" value="delete"/>
-                    <button id="delete-btn">삭제</button>
-                </form>
+<!--                        <h2 th:text="${boardDto.title}"></h2>-->
+<!--                        <p th:inline="text">작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]]</p>-->
+
+<!--                        <p th:text="${boardDto.content}"></p>-->
+
+<!--                        &lt;!&ndash; 수정/삭제 &ndash;&gt;-->
+<!--                        <div th:if="${boardDto.writer} == ${auth.getName()}">-->
+<!--                            <a th:href="@{'/post/edit/' + ${boardDto.id}}">-->
+<!--                                <button>수정</button>-->
+<!--                            </a>-->
+
+<!--                            <form id="delete-form" th:action="@{'/post/' + ${boardDto.id}}" method="post">-->
+<!--                                <input type="hidden" name="_method" value="delete"/>-->
+<!--                                <button id="delete-btn">삭제</button>-->
+<!--                            </form>-->
+<!--                        </div>-->
+
+
+
+                        <table class="table table-bordered">
+                            <tr>
+                                <th class="table-dark">글번호</th>
+                                <td th:text="${boardDto.id}"></td>
+                                <th class="table-dark">작성일</th>
+                                <td th:inline="text">[[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]]</td>
+                            </tr>
+                            <tr>
+                                <th class="table-dark">작성자</th>
+                                <td th:text="${boardDto.writer}"></td>
+                                <th class="table-dark">수정일</th>
+                                <td th:inline="text">[[${#temporals.format(boardDto.modifiedDate, 'yyyy-MM-dd HH:mm')}]]</td>
+                            </tr>
+
+                            <tr>
+                                <th class="table-dark">제목</th>
+                                <td colspan="3" th:text="${boardDto.title}"></td>
+                            </tr>
+
+                            <tr>
+                                <th class="table-dark">내용</th>
+                                <td colspan="3" th:text="${boardDto.content}"></td>
+                            </tr>
+
+                        </table>
+
+
+                        <!-- 수정/삭제 -->
+                        <div class="detail-button" th:if="${boardDto.writer} == ${auth.getName()}">
+                            <a th:href="@{'/post/edit/' + ${boardDto.id}}">
+                                <button class="btn btn-success">수정</button>
+                            </a>
+
+                            <form id="delete-form" th:action="@{'/post/' + ${boardDto.id}}" method="post">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <button class="btn btn-danger" id="delete-btn" >삭제</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </section>
             </div>
-
-            <!-- 변수 셋팅 -->
-            <script th:inline="javascript">
-                /*<![CDATA[*/
-                var boardDto = /*[[${boardDto}]]*/ "";
-                /*]]>*/
-            </script>
-
-            <!-- script -->
-            <script th:inline="javascript" th:src="@{/js/board.js}"></script>
 
 
         </div>
@@ -65,6 +113,18 @@
 
 
 </div>
+
+
+<!-- 변수 셋팅 -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var boardDto = /*[[${boardDto}]]*/ "";
+    /*]]>*/
+</script>
+
+<!-- script -->
+<script th:inline="javascript" th:src="@{/js/board.js}"></script>
+
 
 </body>
 </html>

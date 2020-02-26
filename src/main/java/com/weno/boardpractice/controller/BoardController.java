@@ -3,6 +3,8 @@ package com.weno.boardpractice.controller;
 import com.weno.boardpractice.dto.BoardDto;
 import com.weno.boardpractice.service.BoardService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,6 @@ public class BoardController {
 
     private BoardService boardService;
 
-
     @GetMapping("/")
     public String list(Model model){
         List<BoardDto> boardDtoList = boardService.getBoardlist();
@@ -25,8 +26,13 @@ public class BoardController {
     }
 
     @GetMapping("/post/{no}")
-    public String detail(@PathVariable("no") Long no, Model model){
+    public String detail(@PathVariable("no") Long no, Model model, Principal principal){
         BoardDto boardDto = boardService.getPost(no);
+
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("auth",auth);
+
         model.addAttribute("boardDto", boardDto);
         return "/board/detail.html";
     }
