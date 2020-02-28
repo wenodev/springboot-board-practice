@@ -21,6 +21,10 @@ public class BoardController {
     @GetMapping("/")
     public String list(Model model){
         List<BoardDto> boardDtoList = boardService.getBoardlist();
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("auth",auth);
+
         model.addAttribute("boardList", boardDtoList);
         return "/board/list.html";
     }
